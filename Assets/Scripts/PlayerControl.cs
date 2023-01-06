@@ -13,10 +13,13 @@ public class PlayerControl : MonoBehaviour
     private LineRenderer _webLineRenderer;
     
     private bool _isDrawing = false;
-
+    private Vector3 _firstPosition, _secondPosition;
+    
     private void Start()
     {
         _webLineRenderer = web.GetComponent<LineRenderer>();
+        
+        
     }
 
     void Update()
@@ -50,12 +53,14 @@ public class PlayerControl : MonoBehaviour
         {
             if (_isDrawing)
             {
+                PlaceInstrument();
                 _isDrawing = false;
             }
             else
             {
                 _webLineRenderer.positionCount = 2;
-                _webLineRenderer.SetPosition(0, web.transform.position);
+                _firstPosition = web.transform.position;
+                _webLineRenderer.SetPosition(0, _firstPosition);
                 _isDrawing = true;
             }
         }
@@ -69,7 +74,8 @@ public class PlayerControl : MonoBehaviour
     {
         if (_isDrawing)
         {
-            _webLineRenderer.SetPosition(1, web.transform.position);
+            _secondPosition = web.transform.position;
+            _webLineRenderer.SetPosition(1,_secondPosition);
         }
         else
         {
@@ -77,6 +83,19 @@ public class PlayerControl : MonoBehaviour
             _webLineRenderer.SetPositions(new Vector3[]{position, position});
             _webLineRenderer.positionCount = 0;   
         }
+        
+    }
+
+    private void PlaceInstrument()
+    {
+        
+        Vector3 middlePosition = (_firstPosition + _secondPosition) / 2;
+        Vector3 size =  _secondPosition - _firstPosition ;
+
+        Vector3 rotation = new Vector3(0,0, Mathf.Acos( middlePosition.normalized.magnitude) * Mathf.Rad2Deg );
+        
+        GameObject instantiated = Instantiate(instrument ,middlePosition, Quaternion.Euler(rotation));
+        instantiated.transform.localScale = size;
         
     }
 }
