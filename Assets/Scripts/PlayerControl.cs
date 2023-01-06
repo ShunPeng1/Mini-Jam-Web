@@ -1,16 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
     [SerializeField] private float speed;
-
-    [SerializeField] private GameObject instrument ;
+    [SerializeField] private float rotatedSpeed;
 
     [SerializeField] private GameObject web;
+    
     private LineRenderer _webLineRenderer;
+    private Rigidbody2D _rigidbody2D;
     
     private bool _isDrawing = false;
     private Vector3 _firstPosition, _secondPosition;
@@ -18,11 +20,16 @@ public class PlayerControl : MonoBehaviour
     private void Start()
     {
         _webLineRenderer = web.GetComponent<LineRenderer>();
-        
-        
+        _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+
     }
 
-    void Update()
+    private void Update()
+    {
+        InputWeb();
+    }
+
+    private void FixedUpdate()
     {
         Movement();
         DrawWeb();
@@ -30,46 +37,58 @@ public class PlayerControl : MonoBehaviour
 
     void Movement()
     {
+        Vector3 velocity = Vector3.zero;
+        
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(Vector3.left * (Time.deltaTime * speed)); 
+            velocity+= Vector3.left;
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(Vector3.right * (Time.deltaTime * speed)); 
+            velocity+= Vector3.right;
         }
         
         if (Input.GetKey(KeyCode.W))
         {
-            transform.Translate(Vector3.up * (Time.deltaTime * speed)); 
+            velocity+= Vector3.up;
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            transform.Translate(Vector3.down * (Time.deltaTime * speed)); 
+            velocity+= Vector3.down;
         }
 
+        _rigidbody2D.velocity = velocity * speed;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (velocity != Vector3.zero)
         {
-            if (_isDrawing)
-            {
-                PlaceInstrument();
-                _isDrawing = false;
-            }
-            else
-            {
-                _webLineRenderer.positionCount = 2;
-                _firstPosition = web.transform.position;
-                _webLineRenderer.SetPosition(0, _firstPosition);
-                _isDrawing = true;
-            }
+            Quaternion lookRotation = quaternion.LookRotation(Vector3.forward, velocity.normalized);
+            lookRotation = Quaternion.RotateTowards(transform.rotation, lookRotation, rotatedSpeed * Time.fixedDeltaTime);
+            //_rigidbody2D.MoveRotation(lookRotation);
+            transform.rotation = lookRotation;
         }
-        
         
         
     }
 
-
+    private void InputWeb()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (_isDrawing)
+            {
+                InstrumentSet.Instance.PlaceInstrument(_firstPosition,_secondPosition);
+                web.SetActive(false);    
+                _isDrawing = false;
+            }
+            else
+            {
+                web.SetActive(true);
+                _firstPosition = web.transform.position;
+                _webLineRenderer.SetPosition(0, _firstPosition);
+                _isDrawing = true;
+            }
+        }   
+    }
     private void DrawWeb()
     {
         if (_isDrawing)
@@ -77,27 +96,8 @@ public class PlayerControl : MonoBehaviour
             _secondPosition = web.transform.position;
             _webLineRenderer.SetPosition(1,_secondPosition);
         }
-        else
-        {
-            var position = transform.position;
-            _webLineRenderer.SetPositions(new Vector3[]{position, position});
-            _webLineRenderer.positionCount = 0;   
-        }
         
     }
 
-    private void PlaceInstrument()
-    {
-        Vector3 middlePosition = (_firstPosition + _secondPosition) / 2;
-        Vector3 deltaPosition = (_secondPosition - _firstPosition);
-        if(deltaPosition.magnitude == 0) return;
-        Vector3 size =  new Vector3( deltaPosition.magnitude  ,(deltaPosition.y >=0 ? 1: -1),0) ;
-        
-        Vector3 rotation = new Vector3(0,0, Mathf.Acos( deltaPosition.normalized.x * (deltaPosition.y >=0? 1:-1 ) / deltaPosition.normalized.magnitude  )* Mathf.Rad2Deg);
-        Debug.Log(rotation);
-        
-        GameObject instantiated = Instantiate(instrument ,middlePosition, Quaternion.Euler(rotation));
-        instantiated.transform.localScale = size;
-        
-    }
+    
 }
