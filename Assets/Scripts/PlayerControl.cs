@@ -76,7 +76,7 @@ public class PlayerControl : MonoBehaviour
         {
             if (_isDrawing)
             {
-                InstrumentSet.Instance.PlaceInstrument(_firstPosition,_secondPosition);
+                InstrumentManager.Instance.PlaceInstrument(_firstPosition,_secondPosition);
                 web.SetActive(false);    
                 _isDrawing = false;
             }

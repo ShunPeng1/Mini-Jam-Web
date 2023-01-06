@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-public class StringInstrument : MonoBehaviour
+public class InstrumentControl : MonoBehaviour
 {
     [SerializeField] private float waitToDestroy = 1f;
-    private void OnCollisionEnter2D(Collision2D col)
+    protected void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.CompareTag("Player"))
         {
@@ -16,7 +16,7 @@ public class StringInstrument : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit2D(Collision2D col)
+    protected void OnCollisionExit2D(Collision2D col)
     {
         if (col.gameObject.CompareTag("Player"))
         {
@@ -26,7 +26,7 @@ public class StringInstrument : MonoBehaviour
         }
     }
     
-    private IEnumerator TimerDestroyer()
+    protected IEnumerator TimerDestroyer()
     {
         yield return new WaitForSeconds(waitToDestroy);
         Destroy(gameObject);
