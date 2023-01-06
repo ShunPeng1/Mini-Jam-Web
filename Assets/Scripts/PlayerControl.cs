@@ -88,11 +88,13 @@ public class PlayerControl : MonoBehaviour
 
     private void PlaceInstrument()
     {
-        
         Vector3 middlePosition = (_firstPosition + _secondPosition) / 2;
-        Vector3 size =  _secondPosition - _firstPosition ;
-
-        Vector3 rotation = new Vector3(0,0, Mathf.Acos( middlePosition.normalized.magnitude) * Mathf.Rad2Deg );
+        Vector3 deltaPosition = (_secondPosition - _firstPosition);
+        if(deltaPosition.magnitude == 0) return;
+        Vector3 size =  new Vector3( deltaPosition.magnitude  ,(deltaPosition.y >=0 ? 1: -1),0) ;
+        
+        Vector3 rotation = new Vector3(0,0, Mathf.Acos( deltaPosition.normalized.x * (deltaPosition.y >=0? 1:-1 ) / deltaPosition.normalized.magnitude  )* Mathf.Rad2Deg);
+        Debug.Log(rotation);
         
         GameObject instantiated = Instantiate(instrument ,middlePosition, Quaternion.Euler(rotation));
         instantiated.transform.localScale = size;
