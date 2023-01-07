@@ -11,17 +11,24 @@ public class InstrumentControl : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            Debug.Log("enter");
             StartCoroutine(nameof(TimerDestroyer));
+        }
+
+        if (col.gameObject.CompareTag("Debris"))
+        {
+            PlaySound(col.transform);
         }
     }
 
+    protected virtual void PlaySound(Transform colPosition)
+    {
+        
+    }
+    
     protected void OnCollisionExit2D(Collision2D col)
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            
-            Debug.Log("exit");
             StopCoroutine(nameof(TimerDestroyer));
         }
     }
