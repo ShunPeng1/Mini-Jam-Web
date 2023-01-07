@@ -126,6 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitToDestroy: 1
   soundSource: {fileID: 0}
+  type: 1
   closeHatClip: {fileID: 8300000, guid: bead635f5e5bd384092cd4e267bda9a9, type: 3}
   hiHatClip: {fileID: 8300000, guid: bead635f5e5bd384092cd4e267bda9a9, type: 3}
   rangePercentage0: 0.5

@@ -158,6 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitToDestroy: 1
   soundSource: {fileID: 0}
+  type: 2
   heavyTomClip: {fileID: 8300000, guid: bba4f14cfdda7924bb03b1e93367423f, type: 3}
   lightTomClip: {fileID: 8300000, guid: bba4f14cfdda7924bb03b1e93367423f, type: 3}
   edgeTomClip: {fileID: 8300000, guid: bba4f14cfdda7924bb03b1e93367423f, type: 3}

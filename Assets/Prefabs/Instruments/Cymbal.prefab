@@ -103,7 +103,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 5.12}
+    oldSize: {x: 1.28, y: 1.28}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -126,4 +126,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitToDestroy: 1
   soundSource: {fileID: 0}
+  type: 0
   cymbalClip: {fileID: 8300000, guid: 14345de724d45df4da2a88c01505b3c7, type: 3}

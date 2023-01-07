@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 108869341}
   - component: {fileID: 108869340}
   m_Layer: 5
-  m_Name: Image
+  m_Name: ClockHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -255,8 +255,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0786, y: 4.392}
-  m_SizeDelta: {x: -17.0143, y: -7.9855}
+  m_AnchoredPosition: {x: 0, y: 4.1409984}
+  m_SizeDelta: {x: -10.6138, y: -0.3128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &108869340
 MonoBehaviour:
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 13911608092e02f45b21e69696a2b747, type: 2}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 8bab3ef1c1948864980e539881e9c3b7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1182,7 +1182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerState: 0
-  timerType: 0
+  timerType: 1
   startTime: 0
   finishTime: 0
   timerSpeed: 1
@@ -1225,7 +1225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af28b8a6bd589145ade20018fe59bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainLength: 2
+  clockHandTransform: {fileID: 417135996}
   circleHeatMap: {fileID: 786202928}
   ranges:
   - 1
@@ -1239,20 +1239,18 @@ MonoBehaviour:
   - {fileID: 4132440368361280128, guid: 5161e65a6cea9c8499193627a487be3c, type: 3}
   - {fileID: 3895530184390793065, guid: dbf3e734bafde55478bc681db8e6787c, type: 3}
   - {fileID: 0}
-  timer: {fileID: 1459109307}
   instrumentNotes:
   - type: 3
     correctTime: 0
-    offsetTime: 0
   - type: 2
     correctTime: 0.5
-    offsetTime: 0
   - type: 1
     correctTime: 1
-    offsetTime: 0
   - type: 2
     correctTime: 1.5
-    offsetTime: 0
+  timer: {fileID: 1459109307}
+  totalTimePhase: 2
+  offsetTime: 0.2
 --- !u!1 &1466602431
 GameObject:
   m_ObjectHideFlags: 0

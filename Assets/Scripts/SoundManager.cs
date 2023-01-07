@@ -5,13 +5,17 @@ using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 using TurnTheGameOn.Timer;
+using Unity.VisualScripting;
+using Timer = TurnTheGameOn.Timer.Timer;
 
 public class SoundManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
     public static SoundManager Instance;
-    
+
+    [Header("Transform of object")]
+    [SerializeField] private GameObject clockHandTransform;
     [SerializeField] private Transform circleHeatMap ;
     
     [Header("Type Define")]
@@ -31,9 +35,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private Timer timer;
     [SerializeField] private float totalTimePhase;
     [SerializeField] private float offsetTime;
-    [SerializeField] private int indexSince2NdBeating;
-    [SerializeField] private int currentIndexBeating;
-    [SerializeField] private List<double> timeOfFirstBeat;
     
     void Start()
     {
@@ -47,7 +48,6 @@ public class SoundManager : MonoBehaviour
             int typeIndex = TypeIndex(t.type);
             float xPos = -ranges[typeIndex] * Mathf.Cos(degree* Mathf.Deg2Rad);
             float yPos = ranges[typeIndex] * Mathf.Sin(degree * Mathf.Deg2Rad);
-            Debug.Log(typeIndex+" "+ degree+" "+ xPos.ToString() + " " + yPos.ToString());
             Instantiate(eggPrefabs[typeIndex], new Vector2(xPos, yPos), Quaternion.Euler(0,0,-(degree-90f)), circleHeatMap);
 
             
@@ -90,6 +90,8 @@ public class SoundManager : MonoBehaviour
     {
         timer.SetTimerValue(0);
         timer.timerState = TimerState.Disabled;
+
+        _isBeating = false;
     }
 
     private List<bool> _isBeatNotes;
@@ -98,37 +100,80 @@ public class SoundManager : MonoBehaviour
     {
         timer.RestartTimer();
         timer.finishTime = totalTimePhase;
+        
+        _isBeating = true;
+        
+        _isBeatNotes = new List<bool>();
+
+        for (int j = 0; j < instrumentNotes.Count; j++)
+        {
+            _isBeatNotes.Add(false);
+        }
+
     }
 
-    private void CheckWinning()
+    private bool  CheckWinning()
     {
+        foreach (var t in _isBeatNotes)
+        {
+            if (t == false) return false;
+        }
+
+        return true;
+    }
+
+    private void MoveHand()
+    {
+        float degree =  (float)(90f +  360f * ( timer.GetTimerValue() / totalTimePhase));
         
+        clockHandTransform.transform.rotation = Quaternion.Euler(0, 0, -(degree - 90f));
+
     }
     
     public void ReceiveSound(InstrumentType type)
     {
-        Debug.Log(Time.time);
-        
+        Debug.Log( timer.GetTimerValue());
         if (_isBeating)
         {
             for (int i = 0 ; i< instrumentNotes.Count; i++)
             {
                 var t = instrumentNotes[i];
 
-                if (Mathf.Abs( (float)(t.correctTime - timer.GetTimerValue()) ) <=  offsetTime)
+                if (Mathf.Abs( (t.correctTime - (float)timer.GetTimerValue()) ) <=  offsetTime)
                 {
                     if (_isBeatNotes[i])
                     { 
+                        
+                        Debug.Log("Is Beated index so reset");
                         ResetBeat();
-                        _isBeating = false;
+                    }
+                    else if(instrumentNotes[i].type == type)
+                    {
+                        Debug.Log("Hit at good time so true");
+                        _isBeatNotes[i] = true;
+                        return;
                     }
                     else
                     {
-                        _isBeatNotes[i] = true;
+                        Debug.Log("Ingore");
                     }
                 }
-                
+                else
+                {
+                    if (instrumentNotes[i].type == type && _isBeatNotes[i] == false)
+                    {
+                        Debug.Log("OffTime so reset");
+                        ResetBeat();
+                    }
+                    else
+                    {
+                        Debug.Log("Ingore");
+                    }
+                }
             }
+            
+            Debug.Log("Nothing was hit");
+            ResetBeat();
         }
         else
         {
@@ -141,15 +186,31 @@ public class SoundManager : MonoBehaviour
                 }
                 if (t.type == type)
                 {
+                    Debug.Log("Start First Beat");
                     StartFirstBeat();
-                    _isBeating = true;
-                    _isBeatNotes = new List<bool>(instrumentNotes.Count+1);
+                    
                     _isBeatNotes[i] = true;
                 }
             }
         }
         
     }
-    
+
+    void Update()
+    {
+        if (timer.GetTimerValue() >= totalTimePhase)
+        {
+            if (CheckWinning())
+            {
+                Debug.Log("WIN");
+            }
+            else
+            {
+                ResetBeat();
+            }
+        }
+        
+        MoveHand();
+    }
 
 }
