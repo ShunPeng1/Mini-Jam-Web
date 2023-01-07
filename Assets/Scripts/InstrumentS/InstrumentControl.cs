@@ -9,7 +9,8 @@ public enum InstrumentType
     Red,
     Yellow,
     Green,
-    Blue
+    Blue,
+    White
 }
 
 
@@ -35,6 +36,7 @@ public class InstrumentControl : MonoBehaviour
         if (col.gameObject.CompareTag("Debris"))
         {
             PlaySound(col.transform);
+            SoundManager.Instance.ReceiveSound(type);
         }
     }
 
