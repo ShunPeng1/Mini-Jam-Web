@@ -22,7 +22,6 @@ public class SoundManager : MonoBehaviour
     [Serializable]
     public class InstrumentNote
     {
-        
         // Note that we cannot use 2 same InstrumentType at the same correctTime 
         public InstrumentType type;
         public float correctTime;
@@ -40,42 +39,27 @@ public class SoundManager : MonoBehaviour
     {
         Instance = this;
         
-        
-        int countNumFirstBeat = 0;
         foreach (var t in instrumentNotes)
         {
-            float degree = DegreeOfTime(t.correctTime);
+            float degree =  90f +  360f * ( t.correctTime / totalTimePhase);
             
             // 12h is 0 degree clockwise, 3h is 90 , 6h is 180 , 9h is 270; 
             int typeIndex = TypeIndex(t.type);
             float xPos = -ranges[typeIndex] * Mathf.Cos(degree* Mathf.Deg2Rad);
             float yPos = ranges[typeIndex] * Mathf.Sin(degree * Mathf.Deg2Rad);
-
+            Debug.Log(typeIndex+" "+ degree+" "+ xPos.ToString() + " " + yPos.ToString());
             Instantiate(eggPrefabs[typeIndex], new Vector2(xPos, yPos), Quaternion.Euler(0,0,-(degree-90f)), circleHeatMap);
 
-            if (t.correctTime == 0f)
-            {
-                countNumFirstBeat++;
-            }
+            
         }
         
         var sorted = instrumentNotes.OrderBy(note => note.correctTime).ThenBy(note => note.type);
         
-        //init the time of first beat
-        timeOfFirstBeat = new List<float>(countNumFirstBeat);
-        for (int i = 0; i < countNumFirstBeat; i++)
-        {
-            timeOfFirstBeat[i] = -1;
-        }
-
-        indexSince2NdBeating = countNumFirstBeat;
-
     }
 
     private float DegreeOfTime(float currentTime)
     {
-        
-        float degree = 90f +  360 * ( currentTime / totalTimePhase);
+        return 90f +  360f * ( currentTime / totalTimePhase);
     }
 
     private int TypeIndex(InstrumentType type)
@@ -101,28 +85,71 @@ public class SoundManager : MonoBehaviour
         return -1;
     }
 
+
     private void ResetBeat()
+    {
+        timer.SetTimerValue(0);
+        timer.timerState = TimerState.Disabled;
+    }
+
+    private List<bool> _isBeatNotes;
+    private bool _isBeating = false;
+    private void StartFirstBeat()
+    {
+        timer.RestartTimer();
+        timer.finishTime = totalTimePhase;
+    }
+
+    private void CheckWinning()
     {
         
     }
     
     public void ReceiveSound(InstrumentType type)
     {
-        if (indexSince2NdBeating != 0)
+        Debug.Log(Time.time);
+        
+        if (_isBeating)
         {
-            
+            for (int i = 0 ; i< instrumentNotes.Count; i++)
+            {
+                var t = instrumentNotes[i];
+
+                if (Mathf.Abs( (float)(t.correctTime - timer.GetTimerValue()) ) <=  offsetTime)
+                {
+                    if (_isBeatNotes[i])
+                    { 
+                        ResetBeat();
+                        _isBeating = false;
+                    }
+                    else
+                    {
+                        _isBeatNotes[i] = true;
+                    }
+                }
+                
+            }
         }
         else
         {
-            if (timeOfFirstBeat[ TypeIndex(type) ] == -1f)
+            for (int i = 0 ; i< instrumentNotes.Count; i++)
             {
-                timeOfFirstBeat[TypeIndex(type)] = timer.GetTimerValue();
-            }
-            else
-            {
-                ResetBeat();
+                var t = instrumentNotes[i];
+                if (t.correctTime > 0)
+                {
+                    return;
+                }
+                if (t.type == type)
+                {
+                    StartFirstBeat();
+                    _isBeating = true;
+                    _isBeatNotes = new List<bool>(instrumentNotes.Count+1);
+                    _isBeatNotes[i] = true;
+                }
             }
         }
+        
     }
     
+
 }
