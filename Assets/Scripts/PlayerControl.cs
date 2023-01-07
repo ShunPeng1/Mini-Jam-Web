@@ -11,7 +11,7 @@ public class PlayerControl : MonoBehaviour
 
     [SerializeField] private GameObject web;
     
-    private LineRenderer _webLineRenderer;
+    //private LineRenderer _webLineRenderer;
     private Rigidbody2D _rigidbody2D;
     
     private bool _isDrawing = false;
@@ -19,7 +19,7 @@ public class PlayerControl : MonoBehaviour
     
     private void Start()
     {
-        _webLineRenderer = web.GetComponent<LineRenderer>();
+        //_webLineRenderer = web.GetComponent<LineRenderer>();
         _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
 
     }
@@ -77,16 +77,18 @@ public class PlayerControl : MonoBehaviour
         {
             if (_isDrawing)
             {
-                InstrumentManager.Instance.DestroyLastInserted();
-                InstrumentManager.Instance.PlaceInstrument(_firstPosition,_secondPosition, false);
                 web.SetActive(false);    
                 _isDrawing = false;
+                
+                InstrumentManager.Instance.DestroyLastInserted();
+                InstrumentManager.Instance.PlaceInstrument(_firstPosition,_secondPosition, false);
             }
             else
             {
                 _firstPosition = web.transform.position;
-                _webLineRenderer.SetPosition(0, _firstPosition);
-                _webLineRenderer.SetPosition(1, _secondPosition);
+                _secondPosition = web.transform.position;
+                //_webLineRenderer.SetPosition(0, _firstPosition);
+                //_webLineRenderer.SetPosition(1, _secondPosition);
                 web.SetActive(true);
                 
                 InstrumentManager.Instance.PlaceInstrument(_firstPosition,_secondPosition, true);
@@ -107,7 +109,7 @@ public class PlayerControl : MonoBehaviour
         if (_isDrawing)
         {
             _secondPosition = web.transform.position;
-            _webLineRenderer.SetPosition(1,_secondPosition);
+            //_webLineRenderer.SetPosition(1,_secondPosition);
             InstrumentManager.Instance.ReTransformOrInstantiateInLastInsert(_firstPosition,_secondPosition);
         }
         

@@ -15,7 +15,7 @@ public class InstrumentManager : MonoBehaviour
     [SerializeField] private List<GameObject> realInstruments;
     [SerializeField] private List<GameObject> ghostInstruments;
 
-    private int _lastObjectIndex;    
+    private int _lastObjectIndex = -1;    
 
 
     [Header("Range of instrument")] 
@@ -68,15 +68,17 @@ public class InstrumentManager : MonoBehaviour
         instantiated.transform.localScale = size;
         
         allInstruments.Add(instantiated);
-        _lastObjectIndex = index;
+        _lastObjectIndex = isGhost? index: -1;
     }
 
     public void DestroyLastInserted()
     {
         int index = allInstruments.Count - 1;
+        if (index < 0 ) return;   
         GameObject lastInsert =  allInstruments[index];
         if(lastInsert != null) Destroy(lastInsert);
         allInstruments.RemoveAt(index);
+        _lastObjectIndex = -1;
     }
 
     public void DestroyAll()
@@ -96,15 +98,18 @@ public class InstrumentManager : MonoBehaviour
         
         int index = RangeIndex(deltaPosition.magnitude);
         
+        
+        
         if (_lastObjectIndex != index)
         {
-            DestroyLastInserted();
-            PlaceInstrument(firstPosition,secondPosition);
+            if(_lastObjectIndex != -1) DestroyLastInserted();
+            PlaceInstrument(firstPosition,secondPosition, true);
             return;
         }
 
-        if (index < 0) return; 
-        
+        if (index < 0 ) return;
+
+        _lastObjectIndex = index;
         Vector3 middlePosition = (firstPosition + secondPosition) / 2;
         if(deltaPosition.magnitude == 0) return;
         Vector3 size =  new Vector3( deltaPosition.magnitude  , (deltaPosition.y >=0 ? 1: -1),0) ;

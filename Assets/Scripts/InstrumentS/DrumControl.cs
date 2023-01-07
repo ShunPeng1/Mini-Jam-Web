@@ -18,7 +18,6 @@ public class DrumControl : InstrumentControl
         float objRange = (colPosition.position - transform.position).magnitude;
         float currentRange = (transform.lossyScale.magnitude) * 0.5f;
 
-        Debug.Log(objRange.ToString() + " and " + currentRange.ToString());
         if ( objRange < rangePercentage0 * currentRange)
         {
             soundSource.PlayOneShot(heavyTomClip);
