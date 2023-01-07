@@ -27,6 +27,7 @@ public class PlayerControl : MonoBehaviour
     private void Update()
     {
         InputWeb();
+        InputDeleteAllInstrument();
     }
 
     private void FixedUpdate()
@@ -76,18 +77,30 @@ public class PlayerControl : MonoBehaviour
         {
             if (_isDrawing)
             {
-                InstrumentManager.Instance.PlaceInstrument(_firstPosition,_secondPosition);
+                InstrumentManager.Instance.DestroyLastInserted();
+                InstrumentManager.Instance.PlaceInstrument(_firstPosition,_secondPosition, false);
                 web.SetActive(false);    
                 _isDrawing = false;
             }
             else
             {
-                web.SetActive(true);
                 _firstPosition = web.transform.position;
                 _webLineRenderer.SetPosition(0, _firstPosition);
+                _webLineRenderer.SetPosition(1, _secondPosition);
+                web.SetActive(true);
+                
+                InstrumentManager.Instance.PlaceInstrument(_firstPosition,_secondPosition, true);
                 _isDrawing = true;
             }
         }   
+    }
+
+    private void InputDeleteAllInstrument()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            InstrumentManager.Instance.DestroyAll();
+        }
     }
     private void DrawWeb()
     {
@@ -95,6 +108,7 @@ public class PlayerControl : MonoBehaviour
         {
             _secondPosition = web.transform.position;
             _webLineRenderer.SetPosition(1,_secondPosition);
+            InstrumentManager.Instance.ReTransformOrInstantiateInLastInsert(_firstPosition,_secondPosition);
         }
         
     }

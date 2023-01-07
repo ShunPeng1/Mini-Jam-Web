@@ -9,12 +9,13 @@ public class InstrumentManager : MonoBehaviour
     void Start()
     {
         Instance = this;
-        allCurrentInstruments = new List<GameObject>();
     }
 
-    [SerializeField] private List<GameObject> allCurrentInstruments;
-    [SerializeField] private List<GameObject> instrumentsSpawn;
-    [SerializeField] private float instrumentsWidth = 0.1f;
+    [SerializeField] private List<GameObject> allInstruments;
+    [SerializeField] private List<GameObject> realInstruments;
+    [SerializeField] private List<GameObject> ghostInstruments;
+
+    private int _lastObjectIndex;    
 
 
     [Header("Range of instrument")] 
@@ -48,12 +49,12 @@ public class InstrumentManager : MonoBehaviour
         return 3;
     }
     
-    public void PlaceInstrument(Vector3 firstPosition, Vector3 secondPosition)
+    public void PlaceInstrument(Vector3 firstPosition, Vector3 secondPosition, bool isGhost = false)
     {
         Vector3 middlePosition = (firstPosition + secondPosition) / 2;
         Vector3 deltaPosition = (secondPosition - firstPosition);
         if(deltaPosition.magnitude == 0) return;
-        Vector3 size =  new Vector3( deltaPosition.magnitude  ,instrumentsWidth * (deltaPosition.y >=0 ? 1: -1),0) ;
+        Vector3 size =  new Vector3( deltaPosition.magnitude  , (deltaPosition.y >=0 ? 1: -1),0) ;
         
         Vector3 rotation = new Vector3(0,0, Mathf.Acos( deltaPosition.normalized.x * (deltaPosition.y >=0? 1:-1 ) / deltaPosition.normalized.magnitude  )* Mathf.Rad2Deg);
 
@@ -63,12 +64,59 @@ public class InstrumentManager : MonoBehaviour
             return;
         }
         
-        GameObject instantiated = Instantiate(instrumentsSpawn[index] ,middlePosition, Quaternion.Euler(rotation));
+        GameObject instantiated = Instantiate((isGhost? ghostInstruments[index]: realInstruments[index]) ,middlePosition, Quaternion.Euler(rotation));
         instantiated.transform.localScale = size;
         
-        allCurrentInstruments.Add(instantiated);
+        allInstruments.Add(instantiated);
+        _lastObjectIndex = index;
     }
 
+    public void DestroyLastInserted()
+    {
+        int index = allInstruments.Count - 1;
+        GameObject lastInsert =  allInstruments[index];
+        if(lastInsert != null) Destroy(lastInsert);
+        allInstruments.RemoveAt(index);
+    }
+
+    public void DestroyAll()
+    {
+        foreach (var instrument in allInstruments)
+        {
+            if(instrument != null) Destroy(instrument);
+        }
+
+        allInstruments = new List<GameObject>();
+    }
+
+    public void ReTransformOrInstantiateInLastInsert(Vector3 firstPosition, Vector3 secondPosition)
+    {
+        // resize the new object from pplayer movement, if it is not in range of last object, instaintiate it instead
+        Vector3 deltaPosition = (secondPosition - firstPosition);
+        
+        int index = RangeIndex(deltaPosition.magnitude);
+        
+        if (_lastObjectIndex != index)
+        {
+            DestroyLastInserted();
+            PlaceInstrument(firstPosition,secondPosition);
+            return;
+        }
+
+        if (index < 0) return; 
+        
+        Vector3 middlePosition = (firstPosition + secondPosition) / 2;
+        if(deltaPosition.magnitude == 0) return;
+        Vector3 size =  new Vector3( deltaPosition.magnitude  , (deltaPosition.y >=0 ? 1: -1),0) ;
+        
+        Vector3 rotation = new Vector3(0,0, Mathf.Acos( deltaPosition.normalized.x * (deltaPosition.y >=0? 1:-1 ) / deltaPosition.normalized.magnitude  )* Mathf.Rad2Deg);
+        
+        int lastInsertedIndex = allInstruments.Count - 1;
+        Transform lastInsert =  allInstruments[lastInsertedIndex].transform;
+        lastInsert.position = middlePosition;
+        lastInsert.rotation = Quaternion.Euler( rotation);
+        lastInsert.localScale = size;
+    }
     
 }
 

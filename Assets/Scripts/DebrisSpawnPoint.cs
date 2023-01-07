@@ -7,7 +7,7 @@ public class DebrisSpawnPoint : MonoBehaviour
 {
 
     [SerializeField] private List<float> spawnTime;
-    [SerializeField] private GameObject debris;
+    [SerializeField] private List< GameObject > debris;
     [SerializeField] private float initDelay;
 
     private IEnumerator Start()
@@ -26,7 +26,8 @@ public class DebrisSpawnPoint : MonoBehaviour
         {
             foreach (var time in spawnTime)
             {
-                Instantiate(debris, transform);
+                int index = Random.Range(0, debris.Count);
+                Instantiate(debris[ index ], transform);
                 yield return new WaitForSeconds(time);
             }
         }
