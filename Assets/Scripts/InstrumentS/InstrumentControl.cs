@@ -11,7 +11,7 @@ public class InstrumentControl : MonoBehaviour
     
     private void Start()
     {
-        soundSource = SoundManager.Instance.GetAudioSource();
+        soundSource = FindObjectOfType<AudioSource>();
     }
 
     protected void OnCollisionEnter2D(Collision2D col)
