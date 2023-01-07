@@ -6,7 +6,14 @@ using UnityEngine;
 
 public class InstrumentControl : MonoBehaviour
 {
-    [SerializeField] private float waitToDestroy = 1f;
+    [SerializeField] protected float waitToDestroy = 1f;
+    [SerializeField] protected AudioSource soundSource;
+
+    private void Start()
+    {
+        soundSource = FindObjectOfType<AudioSource>();
+    }
+
     protected void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.CompareTag("Player"))

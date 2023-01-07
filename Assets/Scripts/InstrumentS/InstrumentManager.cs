@@ -23,6 +23,8 @@ public class InstrumentManager : MonoBehaviour
     [SerializeField] private float range2;
     [SerializeField] private float range3;
 
+    [Header("Sound Source")] public AudioSource soundSource;
+    
     private int RangeIndex(float sizeMagnitude)
     {
         if (sizeMagnitude < range0)

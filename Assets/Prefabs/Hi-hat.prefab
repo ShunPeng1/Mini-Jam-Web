@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4595510791440474526}
   - component: {fileID: 4595510791440474527}
   - component: {fileID: 7568896649179404499}
-  - component: {fileID: 4290147914582560036}
+  - component: {fileID: 4644146910924446886}
   m_Layer: 0
   m_Name: Hi-hat
   m_TagString: Untagged
@@ -112,7 +112,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9843539, y: 0.5667963}
   m_EdgeRadius: 0
---- !u!114 &4290147914582560036
+--- !u!114 &4644146910924446886
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,7 +121,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4595510791440474520}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b01d69ae9d31f8d4aa4cf3f4951e0646, type: 3}
+  m_Script: {fileID: 11500000, guid: d397b747b1b44554083cdb9297c1d049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   waitToDestroy: 1
+  soundSource: {fileID: 0}
+  closeHatClip: {fileID: 8300000, guid: 23f1983d47b11af40890f90657a83200, type: 3}
+  hiHatClip: {fileID: 8300000, guid: bead635f5e5bd384092cd4e267bda9a9, type: 3}
+  rangePercentage0: 0.4

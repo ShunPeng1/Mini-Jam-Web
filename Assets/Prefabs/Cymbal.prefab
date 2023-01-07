@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4595510791440474526}
   - component: {fileID: 4595510791440474527}
   - component: {fileID: 7568896649179404499}
-  - component: {fileID: 4290147914582560036}
+  - component: {fileID: 9202475363106360626}
   m_Layer: 0
   m_Name: Cymbal
   m_TagString: Untagged
@@ -112,7 +112,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0943303, y: 0.40666914}
   m_EdgeRadius: 0
---- !u!114 &4290147914582560036
+--- !u!114 &9202475363106360626
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,7 +121,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4595510791440474520}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b01d69ae9d31f8d4aa4cf3f4951e0646, type: 3}
+  m_Script: {fileID: 11500000, guid: 358d94535e0c6fb489ec28d3dc05ebe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   waitToDestroy: 1
+  soundSource: {fileID: 0}
+  cymbalClip: {fileID: 8300000, guid: 14345de724d45df4da2a88c01505b3c7, type: 3}
