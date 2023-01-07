@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6074454499364190918
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6074454499364190905}
+  - component: {fileID: 6074454499364190904}
+  m_Layer: 0
+  m_Name: InstrumentManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6074454499364190905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6074454499364190918}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6074454499364190904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6074454499364190918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb298488c42d6c045ad9d06a386e9678, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allInstruments:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  realInstruments:
+  - {fileID: 4595510791440474520, guid: 14b709aa8c0a7974c810341c0bbfdaff, type: 3}
+  - {fileID: 4595510791440474520, guid: 895fe1846598bd842bb82d44b9c0c059, type: 3}
+  - {fileID: 8300262351156050238, guid: ca47cbd93ac3f7c4fbea20495201fc74, type: 3}
+  - {fileID: 8300262351156050238, guid: 818510e6575a56f45b245fbec8b5a9f9, type: 3}
+  ghostInstruments:
+  - {fileID: 4595510791440474520, guid: e144703cd957b634f95cd8e1b939335c, type: 3}
+  - {fileID: 4595510791440474520, guid: 09840efcefa24e643a4ce755c9ba008f, type: 3}
+  - {fileID: 8300262351156050238, guid: 050bc6d7696aaca458ed5f53978c8fae, type: 3}
+  - {fileID: 8300262351156050238, guid: 9618ed50a50871e428bd25a85fa42735, type: 3}
+  range0: 1
+  range1: 2.95
+  range2: 4.85
+  range3: 6.65
+  range4: 8.5
+  soundSource: {fileID: 0}

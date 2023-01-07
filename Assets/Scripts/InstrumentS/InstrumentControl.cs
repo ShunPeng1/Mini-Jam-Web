@@ -8,10 +8,10 @@ public class InstrumentControl : MonoBehaviour
 {
     [SerializeField] protected float waitToDestroy = 1f;
     [SerializeField] protected AudioSource soundSource;
-
+    
     private void Start()
     {
-        soundSource = FindObjectOfType<AudioSource>();
+        soundSource = SoundManager.Instance.GetAudioSource();
     }
 
     protected void OnCollisionEnter2D(Collision2D col)

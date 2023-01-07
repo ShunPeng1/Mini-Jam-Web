@@ -23,6 +23,7 @@ public class InstrumentManager : MonoBehaviour
     [SerializeField] private float range1;
     [SerializeField] private float range2;
     [SerializeField] private float range3;
+    [SerializeField] private float range4;
 
     [Header("Sound Source")] public AudioSource soundSource;
     
@@ -45,8 +46,11 @@ public class InstrumentManager : MonoBehaviour
         {
             return 2;
         }
-
-        return 3;
+        if (sizeMagnitude < range4)
+        {
+            return 3;
+        }
+        return -1;
     }
     
     public void PlaceInstrument(Vector3 firstPosition, Vector3 secondPosition, bool isGhost = false)
