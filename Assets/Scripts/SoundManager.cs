@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,19 +11,23 @@ public class SoundManager : MonoBehaviour
     
     [SerializeField] protected AudioSource soundSource;
     
+    [SerializeField] private
+    
     void Start()
     {
         Instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Play();
+        }
+    }
+    
+    private void Play()
     {
         
-    }
-
-    public AudioSource GetAudioSource()
-    {
-        return soundSource;
     }
 }
