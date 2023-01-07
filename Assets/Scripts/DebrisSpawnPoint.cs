@@ -10,7 +10,7 @@ public class DebrisSpawnPoint : MonoBehaviour
     [SerializeField] private List< GameObject > debris;
     [SerializeField] private float initDelay;
 
-    private IEnumerator OnEnable()
+    private IEnumerator Start()
     {
         yield return new WaitForSeconds(initDelay);
 

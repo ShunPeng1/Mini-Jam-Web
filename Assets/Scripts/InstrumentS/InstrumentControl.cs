@@ -4,11 +4,22 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+public enum InstrumentType
+{
+    Red,
+    Yellow,
+    Green,
+    Blue
+}
+
+
+
 public class InstrumentControl : MonoBehaviour
 {
     [SerializeField] protected float waitToDestroy = 1f;
     [SerializeField] protected AudioSource soundSource;
-    
+
+    public InstrumentType type;
     private void Start()
     {
         soundSource = FindObjectOfType<AudioSource>();

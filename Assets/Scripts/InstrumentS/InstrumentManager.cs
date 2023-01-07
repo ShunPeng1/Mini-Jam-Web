@@ -46,11 +46,8 @@ public class InstrumentManager : MonoBehaviour
         {
             return 2;
         }
-        if (sizeMagnitude < range4)
-        {
-            return 3;
-        }
-        return -1;
+
+        return 3;
     }
     
     public void PlaceInstrument(Vector3 firstPosition, Vector3 secondPosition, bool isGhost = false)
