@@ -46,6 +46,12 @@ public class SoundManager : MonoBehaviour
             
             // 12h is 0 degree clockwise, 3h is 90 , 6h is 180 , 9h is 270; 
             int typeIndex = TypeIndex(t.type);
+
+            if (typeIndex == -1)
+            {
+                return;
+            }
+
             float xPos = -ranges[typeIndex] * Mathf.Cos(degree* Mathf.Deg2Rad);
             float yPos = ranges[typeIndex] * Mathf.Sin(degree * Mathf.Deg2Rad);
             Instantiate(eggPrefabs[typeIndex], new Vector2(xPos, yPos), Quaternion.Euler(0,0,-(degree-90f)), circleHeatMap);
