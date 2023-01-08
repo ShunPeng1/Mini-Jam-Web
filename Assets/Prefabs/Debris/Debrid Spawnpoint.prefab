@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnTime:
+  - 2
   - 2.5
   debris:
   - {fileID: 8021040637122542244, guid: 9a5a7b9b30661764295efec703fd69c7, type: 3}

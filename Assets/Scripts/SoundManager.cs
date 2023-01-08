@@ -97,6 +97,7 @@ public class SoundManager : MonoBehaviour
     private List<bool> _isBeatNotes;
     private bool _isBeating = false;
     private float _nextBeatTimeCheck;
+    private int _loopCounter = 0;
     
     private void StartFirstBeat()
     {
@@ -206,7 +207,18 @@ public class SoundManager : MonoBehaviour
         {
             if (CheckWinning())
             {
-                Debug.Log("WIN");
+                Debug.Log("Win");
+                
+                // _loopCounter++;
+                // if (_loopCounter == 0)
+                // {
+                //     Debug.Log("Check for second time");
+                //     StartFirstBeat();
+                // }
+                // else
+                // {
+                //     Debug.Log("Win");
+                // }
             }
             else
             {
@@ -225,6 +237,7 @@ public class SoundManager : MonoBehaviour
                 {
                     if (_isBeatNotes[i] == false)
                     {
+                        Debug.Log("Miss a note");
                         ResetBeat();
                         break;
                     }
