@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using TMPro;
 using UnityEngine;
 
 public enum InstrumentType
@@ -27,6 +27,11 @@ public class InstrumentControl : MonoBehaviour
     private void Start()
     {
         soundSource = FindObjectOfType<AudioSource>();
+        
+        if (specialID != 0)
+        {
+            gameObject.GetComponentInChildren<TextMeshProUGUI>().text = specialID.ToString();
+        }
     }
 
     protected void OnCollisionEnter2D(Collision2D col)
