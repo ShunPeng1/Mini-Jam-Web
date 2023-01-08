@@ -1858,6 +1858,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8091078142586372537, guid: 818510e6575a56f45b245fbec8b5a9f9, type: 3}
+      propertyPath: isRemovable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8300262351156050238, guid: 818510e6575a56f45b245fbec8b5a9f9, type: 3}
       propertyPath: m_Name
       value: BlueDrum
@@ -3411,6 +3415,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 44.695
       objectReference: {fileID: 0}
+    - target: {fileID: 4644146910924446886, guid: 895fe1846598bd842bb82d44b9c0c059, type: 3}
+      propertyPath: isRemovable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 895fe1846598bd842bb82d44b9c0c059, type: 3}
 --- !u!1 &2036972292
@@ -3689,6 +3697,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2203318930465439207, guid: ca47cbd93ac3f7c4fbea20495201fc74, type: 3}
+      propertyPath: isRemovable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8300262351156050238, guid: ca47cbd93ac3f7c4fbea20495201fc74, type: 3}
       propertyPath: m_Name
       value: GreenDrum
