@@ -1935,16 +1935,10 @@ MonoBehaviour:
   - type: 1
     correctTime: 0.5
     specialID: 0
-  - type: 1
-    correctTime: 0.75
-    specialID: 0
   - type: 2
     correctTime: 1
     specialID: 0
   - type: 2
-    correctTime: 1.25
-    specialID: 0
-  - type: 3
     correctTime: 1.5
     specialID: 0
   - type: 3
@@ -1953,16 +1947,10 @@ MonoBehaviour:
   - type: 1
     correctTime: 2.5
     specialID: 0
-  - type: 1
-    correctTime: 2.75
-    specialID: 0
   - type: 2
     correctTime: 3
     specialID: 0
   - type: 2
-    correctTime: 3.25
-    specialID: 0
-  - type: 3
     correctTime: 3.5
     specialID: 0
   timer: {fileID: 1459109307}
@@ -2641,7 +2629,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2036972292}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.3, y: -11.02, z: 0}
+  m_LocalPosition: {x: 11.3, y: -5.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2826,9 +2814,9 @@ MonoBehaviour:
   isRemovable: 0
   specialID: 1
   type: 3
-  heavyTomClip: {fileID: 8300000, guid: bba4f14cfdda7924bb03b1e93367423f, type: 3}
-  lightTomClip: {fileID: 8300000, guid: bba4f14cfdda7924bb03b1e93367423f, type: 3}
-  edgeTomClip: {fileID: 8300000, guid: bba4f14cfdda7924bb03b1e93367423f, type: 3}
+  heavyTomClip: {fileID: 8300000, guid: 7ed86d8e84a66df4baeece51d9a228f6, type: 3}
+  lightTomClip: {fileID: 8300000, guid: 7ed86d8e84a66df4baeece51d9a228f6, type: 3}
+  edgeTomClip: {fileID: 8300000, guid: 7ed86d8e84a66df4baeece51d9a228f6, type: 3}
   rangePercentage0: 0.5
   rangePercentage1: 0.9
 --- !u!224 &2798953937725061446
