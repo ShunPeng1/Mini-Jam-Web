@@ -20,6 +20,9 @@ public class InstrumentControl : MonoBehaviour
     [SerializeField] protected float waitToDestroy = 1f;
     [SerializeField] protected AudioSource soundSource;
 
+    [SerializeField] private bool isRemovable = true;
+    [SerializeField] private int specialID = 0;
+
     public InstrumentType type;
     private void Start()
     {
@@ -28,7 +31,7 @@ public class InstrumentControl : MonoBehaviour
 
     protected void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Player"))
+        if (col.gameObject.CompareTag("Player") && isRemovable)
         {
             StartCoroutine(nameof(TimerDestroyer));
         }
@@ -36,7 +39,7 @@ public class InstrumentControl : MonoBehaviour
         if (col.gameObject.CompareTag("Debris"))
         {
             PlaySound(col.transform);
-            SoundManager.Instance.ReceiveSound(type);
+            SoundManager.Instance.ReceiveSound(type, specialID);
         }
     }
 

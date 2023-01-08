@@ -29,6 +29,7 @@ public class SoundManager : MonoBehaviour
         // Note that we cannot use 2 same InstrumentType at the same correctTime 
         public InstrumentType type;
         public float correctTime;
+        public int specialID = 0;
     }
 
     [Header("Time")]
@@ -47,16 +48,20 @@ public class SoundManager : MonoBehaviour
             // 12h is 0 degree clockwise, 3h is 90 , 6h is 180 , 9h is 270; 
             int typeIndex = TypeIndex(t.type);
 
-            if (typeIndex == -1)
+            if (typeIndex == 4 || typeIndex == -1)
             {
                 return;
             }
 
             float xPos = -ranges[typeIndex] * Mathf.Cos(degree* Mathf.Deg2Rad);
             float yPos = ranges[typeIndex] * Mathf.Sin(degree * Mathf.Deg2Rad);
-            Instantiate(eggPrefabs[typeIndex], new Vector2(xPos, yPos), Quaternion.Euler(0,0,-(degree-90f)), circleHeatMap);
+            //Quaternion rotation = Quaternion.Euler(0, 0, -(degree - 90f));
+            GameObject instantiate = Instantiate(eggPrefabs[typeIndex], new Vector2(xPos, yPos), Quaternion.identity, circleHeatMap);
 
-            
+            if (t.specialID != 0)
+            {
+                
+            }
         }
         
         var sorted = instrumentNotes.OrderBy(note => note.correctTime).ThenBy(note => note.type);
@@ -72,7 +77,7 @@ public class SoundManager : MonoBehaviour
     {
         switch (type)
         {
-            case InstrumentType.Red:
+            case InstrumentType.Red: //NOT USED THIS
                 return 0;
             
             case InstrumentType.Yellow:
@@ -139,10 +144,14 @@ public class SoundManager : MonoBehaviour
         clockHandTransform.transform.rotation = Quaternion.Euler(0, 0, -(degree - 90f));
 
     }
-    
-    public void ReceiveSound(InstrumentType type)
+
+    public void ReceiveSound(InstrumentType type, int specialID)
     {
-        Debug.Log( timer.GetTimerValue());
+        if (type == InstrumentType.White) // Ignore White type
+        {
+            return;
+        }
+        
         if (_isBeating)
         {
             for (int i = 0 ; i< instrumentNotes.Count; i++)
@@ -152,12 +161,11 @@ public class SoundManager : MonoBehaviour
                 if (Mathf.Abs( (t.correctTime - (float)timer.GetTimerValue()) ) <=  offsetTime)
                 {
                     if (_isBeatNotes[i])
-                    { 
-                        
+                    {
                         Debug.Log("Is Beated index so reset");
                         ResetBeat();
                     }
-                    else if(instrumentNotes[i].type == type)
+                    else if(instrumentNotes[i].type == type && specialID == instrumentNotes[i].specialID)
                     {
                         Debug.Log("Hit at good time so true");
                         _isBeatNotes[i] = true;
