@@ -18,8 +18,6 @@ public class DebrisSpawnPoint : MonoBehaviour
         
     }
 
-
-
     private IEnumerator Loop()
     {
         while (true)

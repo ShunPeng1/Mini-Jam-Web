@@ -56,6 +56,7 @@ public class InstrumentControl : MonoBehaviour
     protected IEnumerator TimerDestroyer()
     {
         yield return new WaitForSeconds(waitToDestroy);
-        Destroy(gameObject);
+        InstrumentManager.Instance.FindAndDeleteInstrument(gameObject);
+        
     }
 }

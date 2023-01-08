@@ -123,6 +123,12 @@ public class InstrumentManager : MonoBehaviour
         lastInsert.rotation = Quaternion.Euler( rotation);
         lastInsert.localScale = size;
     }
+
+    public void FindAndDeleteInstrument(GameObject deletingInstrument)
+    {
+        allInstruments.Remove(deletingInstrument);
+        Destroy(deletingInstrument);   
+    }
     
 }
 
