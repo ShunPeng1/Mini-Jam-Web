@@ -85,6 +85,12 @@ public class SoundManager : MonoBehaviour
         return -1;
     }
 
+    #region CheckWin
+    
+    private List<bool> _isBeatNotes;
+    private bool _isBeating = false;
+    private int _loopCounter = 0;
+
 
     private void ResetBeat()
     {
@@ -93,11 +99,6 @@ public class SoundManager : MonoBehaviour
 
         _isBeating = false;
     }
-
-    private List<bool> _isBeatNotes;
-    private bool _isBeating = false;
-    private float _nextBeatTimeCheck;
-    private int _loopCounter = 0;
     
     private void StartFirstBeat()
     {
@@ -105,7 +106,6 @@ public class SoundManager : MonoBehaviour
         timer.finishTime = totalTimePhase;
         
         _isBeating = true;
-        _nextBeatTimeCheck = offsetTime;
         
         _isBeatNotes = new List<bool>();
 
@@ -200,6 +200,31 @@ public class SoundManager : MonoBehaviour
         
     }
 
+    private bool LinearSearchAllNote(double currentTime)
+    {
+        for (int i =0; i < instrumentNotes.Count; i++)
+        {
+            //check every note before the next note if it has been confirm to get all and not over delay
+                
+            var note = instrumentNotes[i];
+            if (note.correctTime + offsetTime < currentTime) //Not counting for same correctTime that is nearly happen
+            {
+                if (_isBeatNotes[i] == false)
+                {
+                    Debug.Log("Miss a note");
+                    ResetBeat();
+                    return false;
+                }
+            }
+            else return true;
+        }
+
+        return true;
+    }
+    
+
+    #endregion
+    
     void Update()
     {
         double currentTime = timer.GetTimerValue();
@@ -209,42 +234,18 @@ public class SoundManager : MonoBehaviour
             {
                 Debug.Log("Win");
                 
-                // _loopCounter++;
-                // if (_loopCounter == 0)
-                // {
-                //     Debug.Log("Check for second time");
-                //     StartFirstBeat();
-                // }
-                // else
-                // {
-                //     Debug.Log("Win");
-                // }
             }
             else
             {
                 ResetBeat();
             }
         }
-        else 
+        else
         {
-            
-            for (int i =0; i < instrumentNotes.Count; i++)
-            {
-                //check every note before the next note if it has been confirm to get all and not over delay
-                
-                var note = instrumentNotes[i];
-                if (note.correctTime + offsetTime < currentTime) //Not counting for same correctTime that is nearly happen
-                {
-                    if (_isBeatNotes[i] == false)
-                    {
-                        Debug.Log("Miss a note");
-                        ResetBeat();
-                        break;
-                    }
-                }
-                else break;
-            }
+            LinearSearchAllNote(currentTime);
         }
+        
+        
         MoveHand();
     }
 
