@@ -96,12 +96,15 @@ public class SoundManager : MonoBehaviour
 
     private List<bool> _isBeatNotes;
     private bool _isBeating = false;
+    private float _nextBeatTimeCheck;
+    
     private void StartFirstBeat()
     {
         timer.RestartTimer();
         timer.finishTime = totalTimePhase;
         
         _isBeating = true;
+        _nextBeatTimeCheck = offsetTime;
         
         _isBeatNotes = new List<bool>();
 
@@ -198,7 +201,8 @@ public class SoundManager : MonoBehaviour
 
     void Update()
     {
-        if (timer.GetTimerValue() >= totalTimePhase)
+        double currentTime = timer.GetTimerValue();
+        if (currentTime >= totalTimePhase)
         {
             if (CheckWinning())
             {
@@ -209,7 +213,25 @@ public class SoundManager : MonoBehaviour
                 ResetBeat();
             }
         }
-        
+        else 
+        {
+            
+            for (int i =0; i < instrumentNotes.Count; i++)
+            {
+                //check every note before the next note if it has been confirm to get all and not over delay
+                
+                var note = instrumentNotes[i];
+                if (note.correctTime + offsetTime < currentTime) //Not counting for same correctTime that is nearly happen
+                {
+                    if (_isBeatNotes[i] == false)
+                    {
+                        ResetBeat();
+                        break;
+                    }
+                }
+                else break;
+            }
+        }
         MoveHand();
     }
 
