@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DebrisControl : MonoBehaviour
 {
-    [SerializeField] private float existingTime = 10f;
+    [SerializeField] private float existingTime = 30f;
     private IEnumerator Start()
     {
         yield return new WaitForSeconds(existingTime);
