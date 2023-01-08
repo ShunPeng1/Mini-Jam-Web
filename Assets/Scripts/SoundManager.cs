@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 using TurnTheGameOn.Timer;
 using Unity.VisualScripting;
 using Timer = TurnTheGameOn.Timer.Timer;
@@ -60,7 +61,7 @@ public class SoundManager : MonoBehaviour
 
             if (t.specialID != 0)
             {
-                
+                instantiate.GetComponentInChildren<TextMeshProUGUI>().text = t.specialID.ToString();
             }
         }
         
@@ -246,8 +247,7 @@ public class SoundManager : MonoBehaviour
         {
             if (CheckWinning())
             {
-                Debug.Log("Win");
-                
+                Invoke( nameof(WinLevel) , 1f);
             }
             else
             {
@@ -261,6 +261,11 @@ public class SoundManager : MonoBehaviour
         
         
         MoveHand();
+    }
+
+    void WinLevel()
+    {
+        SceneManager.Instance.GetNextScene();
     }
 
 }

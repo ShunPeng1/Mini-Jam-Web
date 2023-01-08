@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6429030590599021415}
   - component: {fileID: 1134505790441737038}
   - component: {fileID: 8595372509146996020}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: InvisibleWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

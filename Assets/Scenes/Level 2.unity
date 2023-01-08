@@ -1988,9 +1988,9 @@ MonoBehaviour:
   - 9
   eggPrefabs:
   - {fileID: 0}
-  - {fileID: 201069424254510385, guid: 40849ac5f9161744581d6262c85c0fb6, type: 3}
-  - {fileID: 201069424254510385, guid: 23bac195206fefd48ba5f4fa4cec79dd, type: 3}
   - {fileID: 201069424254510385, guid: 8a3956f9d22b55f4dbfba6e70b08cdc2, type: 3}
+  - {fileID: 201069424254510385, guid: 23bac195206fefd48ba5f4fa4cec79dd, type: 3}
+  - {fileID: 201069424254510385, guid: c07705a9ec082b340ab2d6e9b611fb47, type: 3}
   - {fileID: 0}
   instrumentNotes:
   - type: 3
