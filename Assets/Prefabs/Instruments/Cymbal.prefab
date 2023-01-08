@@ -95,7 +95,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 4595510791440474520}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6a94c74345780b146bd5a7ab260f0bd1, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -126,5 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitToDestroy: 1
   soundSource: {fileID: 0}
+  isRemovable: 1
+  specialID: 0
   type: 0
   cymbalClip: {fileID: 8300000, guid: 14345de724d45df4da2a88c01505b3c7, type: 3}

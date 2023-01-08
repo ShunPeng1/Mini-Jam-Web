@@ -166,7 +166,7 @@ public class SoundManager : MonoBehaviour
                         Debug.Log("Is Beated index so reset");
                         ResetBeat();
                     }
-                    else if(instrumentNotes[i].type == type && specialID == instrumentNotes[i].specialID)
+                    else if(instrumentNotes[i].type == type && (specialID == instrumentNotes[i].specialID) || instrumentNotes[i].specialID == 0)
                     {
                         Debug.Log("Hit at good time so true");
                         _isBeatNotes[i] = true;
