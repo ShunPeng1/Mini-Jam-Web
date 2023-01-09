@@ -1885,7 +1885,7 @@ MonoBehaviour:
     specialID: 0
   timer: {fileID: 1459109307}
   totalTimePhase: 4
-  offsetTime: 0.15
+  offsetTime: 0.2
 --- !u!1 &1466602431
 GameObject:
   m_ObjectHideFlags: 0

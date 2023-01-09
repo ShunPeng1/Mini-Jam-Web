@@ -589,7 +589,10 @@ MonoBehaviour:
 
 
     TRY TO BOUNCE THE DEBRIS TO THE CORRECT
-    BEAT'
+    BEAT
+
+
+    THE TIMER WILL RESET IF THE BEAT IS TOO SOON OR LATE'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3b81a3652b9317747beb4590c69c2f42, type: 2}
   m_sharedMaterial: {fileID: -5562842996226369817, guid: 3b81a3652b9317747beb4590c69c2f42, type: 2}

@@ -161,16 +161,17 @@ public class SoundManager : MonoBehaviour
 
                 if (Mathf.Abs( (t.correctTime - (float)timer.GetTimerValue()) ) <=  offsetTime)
                 {
-                    if (_isBeatNotes[i])
-                    {
-                        Debug.Log("Is Beated index so reset");
-                        ResetBeat();
-                    }
-                    else if(instrumentNotes[i].type == type && (specialID == instrumentNotes[i].specialID) || instrumentNotes[i].specialID == 0)
+                    if(_isBeatNotes[i]==false && instrumentNotes[i].type == type && (specialID == instrumentNotes[i].specialID || instrumentNotes[i].specialID == 0))
                     {
                         Debug.Log("Hit at good time so true");
                         _isBeatNotes[i] = true;
                         return;
+                    }
+                    else if (_isBeatNotes[i]  && instrumentNotes[i].type == type && (specialID == instrumentNotes[i].specialID|| instrumentNotes[i].specialID == 0))
+                    {
+                        Debug.Log("Is Beated index so reset");
+                        ResetBeat();
+                        
                     }
                     else
                     {
@@ -179,10 +180,11 @@ public class SoundManager : MonoBehaviour
                 }
                 else
                 {
-                    if (instrumentNotes[i].type == type && _isBeatNotes[i] == false)
+                    if (instrumentNotes[i].type == type  && _isBeatNotes[i] == false)
                     {
                         Debug.Log("OffTime so reset");
                         ResetBeat();
+                        return;
                     }
                     else
                     {
