@@ -1971,13 +1971,13 @@ MonoBehaviour:
   - type: 1
     correctTime: 0.5
     specialID: 0
-  - type: 3
+  - type: 2
     correctTime: 1
     specialID: 0
   - type: 1
     correctTime: 1
     specialID: 0
-  - type: 2
+  - type: 3
     correctTime: 1.5
     specialID: 0
   - type: 1
@@ -1995,13 +1995,13 @@ MonoBehaviour:
   - type: 1
     correctTime: 2.5
     specialID: 0
-  - type: 3
+  - type: 2
     correctTime: 3
     specialID: 0
   - type: 1
     correctTime: 3
     specialID: 0
-  - type: 2
+  - type: 3
     correctTime: 3.5
     specialID: 0
   - type: 1
@@ -2009,7 +2009,7 @@ MonoBehaviour:
     specialID: 0
   timer: {fileID: 1459109307}
   totalTimePhase: 4
-  offsetTime: 0.1
+  offsetTime: 0.15
 --- !u!1 &1466602431
 GameObject:
   m_ObjectHideFlags: 0
