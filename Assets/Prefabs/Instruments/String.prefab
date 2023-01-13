@@ -126,6 +126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitToDestroy: 1
   soundSource: {fileID: 0}
+  isRemovable: 1
+  specialID: 0
   type: 4
 --- !u!1 &5052950767437651686
 GameObject:

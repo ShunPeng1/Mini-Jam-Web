@@ -13,8 +13,6 @@ public enum InstrumentType
     White
 }
 
-
-
 public class InstrumentControl : MonoBehaviour
 {
     [SerializeField] protected float waitToDestroy = 1f;
@@ -38,7 +36,10 @@ public class InstrumentControl : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player") && isRemovable)
         {
-            StartCoroutine(nameof(TimerDestroyer));
+            if (col.gameObject.GetComponent<PlayerControl>().DashingRemoveInstrument())
+            {
+                Destroy(gameObject);
+            }
         }
 
         if (col.gameObject.CompareTag("Debris"))
@@ -52,19 +53,6 @@ public class InstrumentControl : MonoBehaviour
     {
         
     }
+
     
-    protected void OnCollisionExit2D(Collision2D col)
-    {
-        if (col.gameObject.CompareTag("Player"))
-        {
-            StopCoroutine(nameof(TimerDestroyer));
-        }
-    }
-    
-    protected IEnumerator TimerDestroyer()
-    {
-        yield return new WaitForSeconds(waitToDestroy);
-        InstrumentManager.Instance.FindAndDeleteInstrument(gameObject);
-        
-    }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2798953937974611573}
   - component: {fileID: 5729658000473086778}
   - component: {fileID: 3705431669467671942}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 3125207647961574063}
   - component: {fileID: 7385748913027056533}
   - component: {fileID: 1551769246723845604}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 8300262351156050239}
   - component: {fileID: 2203318930465439207}
   - component: {fileID: 5509842436252890509}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GreenDrum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8300262351535217150}
   - component: {fileID: 8300262351535217137}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Actual Drum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
